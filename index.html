@@ -478,6 +478,7 @@
             color: var(--text-secondary);
             cursor: pointer;
             flex-shrink: 0;
+            white-space: nowrap;
             transition: 0.2s;
         }
 
@@ -609,7 +610,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            z-index: 30;
+            z-index: 15;
         }
 
         .btn-ctrl {
@@ -638,7 +639,7 @@
             position: absolute;
             left: 24px;
             bottom: 30px;
-            z-index: 30;
+            z-index: 15;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             padding: 8px 14px;
@@ -1150,18 +1151,19 @@
         .btn-floating-sidebar {
             display: none;
             position: absolute;
-            top: 14px;
-            left: 14px;
+            top: 10px;
+            left: 10px;
             z-index: 35;
             background: var(--bg-card);
             border: 1px solid var(--primary-glow);
             color: var(--primary);
-            padding: 8px 14px;
+            padding: 6px 12px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         .btn-floating-sidebar:active {
@@ -1171,20 +1173,21 @@
         .landscape-hint-btn {
             display: none;
             position: absolute;
-            top: 14px;
-            right: 14px;
+            top: 10px;
+            right: 10px;
             z-index: 35;
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.92);
             backdrop-filter: blur(8px);
             border: 1px solid var(--primary-glow);
             color: var(--primary);
-            padding: 8px 14px;
+            padding: 6px 10px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
             transition: all 0.2s ease;
-            animation: pulseHint 2s infinite;
+            white-space: nowrap;
+            animation: pulseHint 2.5s infinite;
         }
 
         @keyframes pulseHint {
@@ -1193,7 +1196,7 @@
             }
 
             70% {
-                box-shadow: 0 0 0 10px rgba(56, 189, 248, 0);
+                box-shadow: 0 0 0 8px rgba(56, 189, 248, 0);
             }
 
             100% {
@@ -1204,50 +1207,76 @@
         /* Mobile Portrait Rules (< 768px portrait) */
         @media (max-width: 768px) and (orientation: portrait) {
             .header {
-                height: 56px;
-                padding: 0 12px;
+                height: 52px;
+                padding: 0 10px;
+            }
+
+            .brand-container {
+                gap: 6px;
+                min-width: 0;
             }
 
             .brand-logo-img {
-                height: 30px;
-                max-width: 100px;
+                height: 24px;
+                max-width: 75px;
             }
 
             .brand-title {
-                font-size: 14px;
+                font-size: 12.5px;
+                white-space: nowrap;
             }
 
             .brand-badge {
                 font-size: 8px;
-                padding: 1px 5px;
+                padding: 1px 4px;
             }
 
             .brand-subtitle,
             .time-display {
-                display: none;
+                display: none !important;
+            }
+
+            .header-actions {
+                gap: 4px;
             }
 
             .mode-btn {
-                padding: 4px 8px;
-                font-size: 11px;
+                padding: 5px 8px;
+                font-size: 12px;
+                white-space: nowrap;
             }
 
             .btn-action {
-                padding: 6px 10px;
-                font-size: 11px;
+                padding: 5px 8px;
+                font-size: 12px;
+                white-space: nowrap;
+            }
+
+            /* On narrow phones (< 520px), hide long button text labels for ultra-clean header */
+            @media (max-width: 520px) {
+                .header-actions .btn-label {
+                    display: none !important;
+                }
+                .brand-badge {
+                    display: none !important;
+                }
+                .mode-btn, .btn-action {
+                    padding: 5px 9px;
+                    font-size: 14px;
+                }
             }
 
             .coo-dashboard-bar {
-                padding: 8px 12px;
-                gap: 12px;
+                padding: 6px 10px;
+                gap: 10px;
             }
 
             .coo-stat-label {
-                font-size: 9px;
+                font-size: 8.5px;
             }
 
             .coo-stat-value {
-                font-size: 13px;
+                font-size: 12px;
             }
 
             .mobile-sidebar-toggle {
@@ -1261,7 +1290,7 @@
             .landscape-hint-btn {
                 display: flex;
                 align-items: center;
-                gap: 6px;
+                gap: 4px;
             }
 
             .sidebar {
@@ -1269,43 +1298,50 @@
                 position: absolute;
                 bottom: 0;
                 top: auto;
-                height: 70vh;
+                height: 72vh;
                 border-radius: 20px 20px 0 0;
                 border-right: none;
                 border-top: 1px solid var(--border-color);
                 transform: translateY(calc(100% - 46px));
-                box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.6);
+                box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.7);
                 background: rgba(15, 23, 42, 0.98);
-                backdrop-filter: blur(12px);
+                backdrop-filter: blur(16px);
+                z-index: 45;
+                transition: transform 0.3s ease;
             }
 
             .sidebar.expanded {
-                transform: translateY(0);
+                transform: translateY(0) !important;
             }
 
             .detail-drawer {
                 width: 100%;
-                height: 75vh;
+                height: 70vh;
                 top: auto;
                 bottom: 0;
+                left: 0;
                 border-radius: 20px 20px 0 0;
                 border-left: none;
                 border-top: 1px solid var(--border-color);
                 transform: translateY(100%);
+                z-index: 60;
+                transition: transform 0.3s ease;
             }
 
             .detail-drawer.open {
-                transform: translateY(0);
+                transform: translateY(0) !important;
             }
 
             .map-controls-group {
-                bottom: 60px;
-                right: 16px;
+                bottom: 56px;
+                right: 12px;
+                z-index: 15;
             }
 
             .compass-rose {
-                bottom: 60px;
-                left: 16px;
+                bottom: 56px;
+                left: 12px;
+                z-index: 15;
             }
 
             .admin-modal-container {
@@ -1324,6 +1360,7 @@
                 border-bottom: 1px solid var(--border-color);
                 padding: 8px;
                 display: flex;
+                overflow-x: auto;
             }
 
             .form-row {
@@ -1335,56 +1372,42 @@
         @media (orientation: landscape) and (max-height: 550px),
         (max-width: 950px) and (orientation: landscape) {
             .header {
-                height: 44px;
-                padding: 0 12px;
+                height: 42px;
+                padding: 0 10px;
             }
 
             .brand-logo-img {
-                height: 26px;
+                height: 22px;
+                max-width: 70px;
             }
 
             .brand-title {
-                font-size: 13px;
+                font-size: 12px;
             }
 
             .brand-badge,
             .brand-subtitle,
             .time-display {
-                display: none;
+                display: none !important;
+            }
+
+            .header-actions .btn-label {
+                display: none !important;
             }
 
             .mode-btn {
                 padding: 4px 8px;
-                font-size: 11px;
+                font-size: 13px;
             }
 
             .btn-action {
-                padding: 5px 10px;
-                font-size: 11px;
+                padding: 4px 8px;
+                font-size: 13px;
             }
 
+            /* Hide COO bar in phone landscape mode to maximize map height */
             .coo-dashboard-bar {
-                padding: 4px 12px;
-                max-height: 34px;
-                overflow-y: hidden;
-            }
-
-            .dept-title {
-                display: none;
-            }
-
-            .coo-stat-item {
-                flex-direction: row;
-                gap: 4px;
-                align-items: center;
-            }
-
-            .coo-stat-label {
-                font-size: 8px;
-            }
-
-            .coo-stat-value {
-                font-size: 11px;
+                display: none !important;
             }
 
             .mobile-sidebar-toggle {
@@ -1393,12 +1416,13 @@
 
             .btn-floating-sidebar {
                 display: flex;
-                top: 10px;
-                left: 10px;
+                top: 8px;
+                left: 8px;
             }
 
             .sidebar {
-                width: 320px;
+                width: 300px;
+                max-width: 80vw;
                 position: absolute;
                 left: 0;
                 top: 0;
@@ -1408,42 +1432,48 @@
                 border-radius: 0;
                 border-right: 1px solid var(--border-color);
                 border-top: none;
-                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.6);
+                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.7);
                 z-index: 45;
                 background: rgba(15, 23, 42, 0.98);
-                backdrop-filter: blur(12px);
+                backdrop-filter: blur(16px);
+                transition: transform 0.3s ease;
             }
 
             .sidebar.expanded {
-                transform: translateX(0);
+                transform: translateX(0) !important;
             }
 
             .landscape-hint-btn {
                 display: none !important;
             }
 
+            /* Map controls on bottom left in landscape mode stacked above compass rose */
             .map-controls-group {
-                bottom: 12px;
-                right: 12px;
-                gap: 6px;
+                bottom: 50px;
+                left: 12px;
+                right: auto;
+                gap: 5px;
+                z-index: 15;
             }
 
             .btn-ctrl {
-                width: 38px;
-                height: 38px;
-                font-size: 16px;
-                border-radius: 10px;
+                width: 34px;
+                height: 34px;
+                font-size: 15px;
+                border-radius: 8px;
             }
 
             .compass-rose {
-                bottom: 12px;
+                bottom: 10px;
                 left: 12px;
-                padding: 5px 10px;
-                font-size: 10px;
+                padding: 4px 8px;
+                font-size: 9.5px;
+                z-index: 15;
             }
 
             .detail-drawer {
-                width: 340px;
+                width: 310px;
+                max-width: 85vw;
                 height: 100%;
                 top: 0;
                 bottom: 0;
@@ -1453,15 +1483,17 @@
                 border-left: 1px solid var(--border-color);
                 border-top: none;
                 transform: translateX(100%);
+                z-index: 60;
+                transition: transform 0.3s ease;
             }
 
             .detail-drawer.open {
-                transform: translateX(0);
+                transform: translateX(0) !important;
             }
 
             .admin-modal-container {
                 width: 98%;
-                height: 94vh;
+                height: 96vh;
             }
         }
     </style>
@@ -1490,14 +1522,11 @@
             <div class="time-display" id="clockDisplay">⏰ 00:00:00</div>
 
             <div class="view-mode-toggle">
-                <button class="mode-btn active" id="btnModeCustomer" onclick="AppController.setMode('CUSTOMER')">👁
-                    Khách Hàng</button>
-                <button class="mode-btn" id="btnModeCOO" onclick="AppController.setMode('COO')">📊 Giám Đốc Vận
-                    Hành</button>
+                <button class="mode-btn active" id="btnModeCustomer" onclick="AppController.setMode('CUSTOMER')" title="Chế độ Khách Hàng">👁 <span class="btn-label">Khách Hàng</span></button>
+                <button class="mode-btn" id="btnModeCOO" onclick="AppController.setMode('COO')" title="Chế độ Giám Đốc Vận Hành">📊 <span class="btn-label">Giám Đốc Vận Hành</span></button>
             </div>
 
-            <button class="btn-action btn-admin" id="btnAdmin" onclick="AdminController.open()">⚙ Quản Trị Dữ
-                Liệu</button>
+            <button class="btn-action btn-admin" id="btnAdmin" onclick="AdminController.open()" title="Quản Trị Dữ Liệu">⚙ <span class="btn-label">Quản Trị Dữ Liệu</span></button>
         </div>
     </div>
 
@@ -1597,12 +1626,12 @@
             <!-- Floating Mobile Sidebar Toggle Button when Sidebar is collapsed -->
             <button class="btn-floating-sidebar" id="btnFloatingSidebar" onclick="AppController.toggleSidebar()"
                 title="Mở danh sách">
-                🔍 Tìm Kiếm & Tầng
+                🔍 Sơ Đồ & Tầng
             </button>
 
             <!-- Landscape Orientation Suggestion Hint for Mobile Portrait -->
             <button class="landscape-hint-btn" id="btnLandscapeHint" onclick="AppController.requestLandscapeHint()">
-                🔄 Xoay ngang để xem rộng hơn
+                🔄 Xoay Ngang
             </button>
             <svg id="map-svg" viewBox="0 0 1100 650">
                 <defs>
